@@ -4,6 +4,7 @@ import MedicineForm from './components/MedicineForm'
 import MedicineList from './components/MedicineList'
 import Analytics from './components/Analytics'
 import axios from 'axios'
+import logo from './assets/logo.jpeg'
 
 function App() {
   const [medicines, setMedicines] = useState([])
@@ -58,30 +59,35 @@ function App() {
   }
 
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      <Typography variant="h3" gutterBottom align="center">
-        Medicine Dashboard
-      </Typography>
-      
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={4}>
-          <MedicineForm
-            onSubmit={handleSubmit}
-            editMedicine={editMedicine}
-            setEditMedicine={setEditMedicine}
-          />
+    <>
+      <Container maxWidth="lg" sx={{ textAlign: 'center' }}>
+        <img src={logo} alt="Logo" style={{ width: '150px', marginBottom: '20px' }} />
+      </Container>
+      <Container maxWidth="lg" sx={{ py: 4 }}>
+        <Typography variant="h3" gutterBottom align="center">
+          Medicine Dashboard
+        </Typography>
+
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={4}>
+            <MedicineForm
+              onSubmit={handleSubmit}
+              editMedicine={editMedicine}
+              setEditMedicine={setEditMedicine}
+            />
+          </Grid>
+
+          <Grid item xs={12} md={8}>
+            <Analytics medicines={medicines} />
+            <MedicineList
+              medicines={medicines}
+              onEdit={setEditMedicine}
+              onDelete={handleDelete}
+            />
+          </Grid>
         </Grid>
-        
-        <Grid item xs={12} md={8}>
-          <Analytics medicines={medicines} />
-          <MedicineList
-            medicines={medicines}
-            onEdit={setEditMedicine}
-            onDelete={handleDelete}
-          />
-        </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </>
   )
 }
 
